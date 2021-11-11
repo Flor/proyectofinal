@@ -1,16 +1,58 @@
 import React, {Component} from 'react';
-import {Text, TouchableOpacity, View, StyleSheet} from 'react-native';
+import {Text, TouchableOpacity, View, StyleSheet, Image, ActivityIndicator, FlatList, TextInput} from 'react-native';
+
+const profesores = [
+  {
+    id: 1,
+    nombre: "Ale"
+  },
+  {
+    id: 2,
+    nombre: "Everaldo"
+  },
+  {
+    id: 3,
+    nombre: "Maca"
+  }
+]
 
 class Home extends Component{
   constructor(props){
     super(props);
     this.state ={
-
+      email: ''
     }
   }
   render(){
     return(
       <View style={styles.container}>
+        <Text>Hola Mundo</Text>
+        {/* Formulario de Login */}
+        <View style={styles.formContainer}>
+          {/* Campo para email */}
+          <TextInput
+             style={styles.field}
+             keyboardType='email-address'
+             placeholder='email'
+             onChangeText={ text => this.setState({ email: text })}       
+          />
+          <Text> El email ingresado es: {this.state.email}</Text>
+
+          {/* Campo para contraseña */}
+
+          {/* Botón submit */}
+
+        </View>
+
+        <ActivityIndicator size='small' color='red' />
+        
+
+        <FlatList 
+          data= { profesores }
+          keyExtractor = { profesor => profesor.id.toString()}
+          renderItem = { ({item}) => <Text>{item.nombre}</Text>}
+        />
+
         <TouchableOpacity 
           style={styles.touchable}
           onPress={ ()=> console.log('Me clickeraon')}>
@@ -32,6 +74,24 @@ const styles = StyleSheet.create({
   container:{
     paddingHorizontal:10,
   },
+  formContainer:{
+    backgroundColor: '#ccc',
+    marginHorizontal: 10,
+    padding:10,
+  },
+  field:{
+    borderColor: '#444',
+    borderWidth:1,
+    borderStyle: 'solid',
+    height: 20,
+    paddingHorizontal: 20,
+    paddingVertical:10
+  },
+  
+  image:{
+    height: 250,
+  }, 
+
   touchable:{
     backgroundColor: '#ccc',
     borderRadius:4,
